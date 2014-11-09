@@ -1,0 +1,5 @@
+IconicTileSmall 71x110
+IconicTileMediumLarge 134x202
+FlipCycleTileSmall 159x159
+FlipCycleTileMedium 336x336
+FlipCycleTileLarge 691x336

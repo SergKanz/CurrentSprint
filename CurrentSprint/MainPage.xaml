@@ -1,0 +1,144 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="CurrentSprint.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True"
+    >
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent" ManipulationStarted="Grid_ManipulationStarted" ManipulationDelta="Grid_ManipulationDelta">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- LOCALIZATION NOTE:
+            To localize the displayed strings copy their values to appropriately named
+            keys in the app's neutral language resource file (AppResources.resx) then
+            replace the hard-coded text value between the attributes' quotation marks
+            with the binding clause whose path points to that string name.
+
+            For example:
+
+                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
+
+            This binding points to the template's string resource named "ApplicationTitle".
+
+            Adding supported languages in the Project Properties tab will create a
+            new resx file per language that can carry the translated values of your
+            UI strings. The binding in these examples will cause the value of the
+            attributes to be drawn from the .resx file that matches the
+            CurrentUICulture of the app at run time.
+         -->
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28" d:DataContext="{d:DesignData Source=SampleSprint.xaml}">
+            <TextBlock Text="CURRENT VISUAL STUDIO SPRINT" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0" />
+            <TextBlock Text="{Binding Path=Number, StringFormat='Sprint {0}'}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" >
+            </TextBlock>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Path=StartWorkingDate, StringFormat='M'}"/>
+                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="-" Margin="0"/>
+                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Path=EndWorkingDate, StringFormat='M'}"/>
+            </StackPanel>
+            <Grid Margin="0, 40, 0, 0"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+
+                <Grid Visibility="{Binding Path=IsTodayIncluded, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Row="{Binding Path=TodayWeek}" Grid.Column="{Binding Path=TodayDay}" Background="{StaticResource PhoneAccentBrush}"></Grid>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}">Su</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}">Mo</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}">Tu</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}">We</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}">Th</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}">Fr</TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="7" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}">Sa</TextBlock>
+
+
+                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}" Text="{Binding Path=PreviousNum, StringFormat=' {0}.3'}"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Number, StringFormat=' {0}.1'}"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Number, StringFormat=' {0}.2'}"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Number, StringFormat=' {0}.3'}"/>
+                <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource PhoneSubtleBrush}"  Text="{Binding Path=NextNum, StringFormat=' {0}.1'}"/>
+
+
+                <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[0][0]}" />
+                <TextBlock Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[0][1]}" />
+                <TextBlock Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[0][2]}" />
+                <TextBlock Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[0][3]}" />
+                <TextBlock Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[0][4]}" />
+                <TextBlock Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[0][5]}" />
+                <TextBlock Grid.Row="1" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[0][6]}" />
+
+                <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[1][0]}" />
+                <TextBlock Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[1][1]}" />
+                <TextBlock Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[1][2]}" />
+                <TextBlock Grid.Row="2" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[1][3]}" />
+                <TextBlock Grid.Row="2" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[1][4]}" />
+                <TextBlock Grid.Row="2" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[1][5]}" />
+                <TextBlock Grid.Row="2" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[1][6]}" />
+
+                <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[2][0]}" />
+                <TextBlock Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[2][1]}" />
+                <TextBlock Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[2][2]}" />
+                <TextBlock Grid.Row="3" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[2][3]}" />
+                <TextBlock Grid.Row="3" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[2][4]}" />
+                <TextBlock Grid.Row="3" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[2][5]}" />
+                <TextBlock Grid.Row="3" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[2][6]}" />
+
+                <TextBlock Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[3][0]}" />
+                <TextBlock Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[3][1]}" />
+                <TextBlock Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[3][2]}" />
+                <TextBlock Grid.Row="4" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[3][3]}" />
+                <TextBlock Grid.Row="4" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[3][4]}" />
+                <TextBlock Grid.Row="4" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[3][5]}" />
+                <TextBlock Grid.Row="4" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Text="{Binding Path=WeekDates[3][6]}" />
+
+                <TextBlock Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[4][0]}" />
+                <TextBlock Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[4][1]}" />
+                <TextBlock Grid.Row="5" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[4][2]}" />
+                <TextBlock Grid.Row="5" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[4][3]}" />
+                <TextBlock Grid.Row="5" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[4][4]}" />
+                <TextBlock Grid.Row="5" Grid.Column="6" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[4][5]}" />
+                <TextBlock Grid.Row="5" Grid.Column="7" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" Foreground="{StaticResource PhoneInactiveBrush}" Text="{Binding Path=WeekDates[4][6]}" />
+
+
+            </Grid>
+        </StackPanel>
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/Dark/back.png" Text="Previous" Click="Previous_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/Dark/basecircle.png" Text="Today"  Click="Today_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/Dark/next.png" Text="Next" Click="Next_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>

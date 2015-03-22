@@ -10,7 +10,6 @@ using Microsoft.Phone.Shell;
 using CurrentSprint.Resources;
 using Microsoft.Phone.Scheduler;
 using CurrentSprintClasses;
-using Microsoft.ApplicationInsights.Telemetry.WindowsStore;
 using System.Diagnostics;
 
 namespace CurrentSprint

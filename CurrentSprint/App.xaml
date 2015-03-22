@@ -5,11 +5,6 @@
       <local:LocalizedStrings xmlns:local="clr-namespace:CurrentSprint" x:Key="LocalizedStrings" />
       <mine:SprintTitleConverter x:Key="sprintTitleConverter" />
       <mine:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-      <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary>
-          <ai:ApplicationInsightsModule x:Key="ApplicationInsightsModule" xmlns:ai="clr-namespace:Microsoft.ApplicationInsights.Telemetry.WindowsStore;assembly=Microsoft.ApplicationInsights.Telemetry.WindowsStore" />
-        </ResourceDictionary>
-      </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
   <Application.ApplicationLifetimeObjects>
